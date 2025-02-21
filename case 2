@@ -1,0 +1,23 @@
+min_brightness = 10
+step_size = 10
+max_brightness = 100
+
+brightness = min_brightness
+
+print("LED Brightness Control")
+print("Brightness is represented visually using '*' characters.")
+print("-------------------------------------------------------")
+
+while True:
+    print("Brightness [" + str(brightness) + "%] - " + ("*" * (brightness // 10)))
+    
+    # Simulated automatic brightness adjustment loop
+    if brightness + step_size <= max_brightness:
+        brightness += step_size
+    else:
+        brightness = min_brightness  # Reset to min when max is reached
+    
+    # Adding a simple break condition for demonstration purposes
+    if brightness == min_brightness:
+        print("Resetting brightness to minimum...")
+        break
