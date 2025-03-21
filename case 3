@@ -1,0 +1,18 @@
+import random
+def temp():
+    # Taking input from the user for LOWER and HIGH temperature.
+    lowTemp = float(input("Enter the minimum temperature (°C): "))
+    highTemp = float(input("Enter the maximum temperature (°C): "))
+
+    currentTemp = random.uniform(-10, 50) 
+    print(f"Current temperature is: {currentTemp:.2f}°C")
+
+    # Checking temperatures
+    if currentTemp < lowTemp:
+        print(f"Alert: Temperature is too low! Current temperature: {currentTemp:.2f}°C (Below {lowTemp}°C)")
+    elif currentTemp > highTemp:
+        print(f"Alert: Temperature is too high! Current temperature: {currentTemp:.2f}°C (Above {highTemp}°C)")
+    else:
+        print(f"Temperature is normal. Current temperature: {currentTemp:.2f}°C (Within {lowTemp}°C and {highTemp}°C)")
+
+temp()
