@@ -1,0 +1,92 @@
+def display_menu():
+    print("\nTo-Do List Menu:")
+    print("1. Add Task")
+    print("2. View Tasks")
+    print("3. Delete Task")
+    print("4. Mark Task as Completed")
+    print("5. Exit")
+
+def add_task(tasks):
+    TT = input("\nEnter the task name: ")
+    TP = input("Enter the priority (High/Medium/Low): ").capitalize()
+
+    
+    if TP not in ['High', 'Medium', 'Low']:
+        print("Invalid priority. Setting default to Medium.")
+        TP = 'Medium'
+
+    tasks.append({
+        'name': TT,
+        'priority': TP,
+        'status': '[  ]'
+    })
+    print(f"\nTask '{TT}' added with {TP} priority.")
+
+def view_tasks(tasks):
+    if not tasks:
+        print("\nNo tasks to display.")
+    else:
+        print("\nYour tasks:")
+        for idx, task in enumerate(sorted(tasks, key=lambda x: (x['priority']))):
+            print(f"\n{idx + 1}. {task['status']} {task['name']} (Priority: {task['priority']})")
+
+def delete_task(tasks):
+    if not tasks:
+        print("\nNo tasks to delete.")
+        return
+    
+    view_tasks(tasks)
+    try:
+        task_idx = int(input("\nEnter the task number to delete: ")) - 1
+        if 0 <= task_idx < len(tasks):
+            removed_task = tasks.pop(task_idx)
+            print(f"\nTask '{removed_task['name']}' deleted.")
+        else:
+            print("\nInvalid task number.")
+    except ValueError:
+        print("\nPlease enter a valid number.")
+
+def mark_task_completed(tasks):
+    if not tasks:
+        print("\nNo tasks to mark as completed.")
+        return
+    
+    view_tasks(tasks)
+    try:
+        task_idx = int(input("\nEnter the task number to mark as completed: ")) - 1
+        if 0 <= task_idx < len(tasks):
+            task = tasks[task_idx]
+            task['status'] = '[✅]'
+            print(f"\nTask '{task['name']}' marked as completed.")
+        else:
+            print("\nInvalid task number.")
+    except ValueError:
+        print("\nPlease enter a valid number.")
+
+def main():
+    tasks = []
+
+    while True:
+        display_menu()
+
+        try:
+            choice = int(input("\nChoose an option: "))
+
+            if choice == 1:
+                add_task(tasks)
+            elif choice == 2:
+                view_tasks(tasks)
+            elif choice == 3:
+                delete_task(tasks)
+            elif choice == 4:
+                mark_task_completed(tasks)
+            elif choice == 5:
+                print("\nExiting the To-Do List program. Goodbye!")
+                break
+            else:
+                print("\nInvalid choice. Please select a valid option.")
+        except ValueError:
+            print("\nInvalid input. Please enter a number between 1 and 5.")
+
+if __name__ == "__main__":
+    main()
