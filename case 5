@@ -1,0 +1,23 @@
+ import pandas as pd
+ import matplotlib.pyplot as plt
+ import os
+ current_dir = os.getcwd()
+ file_path = os.path.join(current_dir, 'Marks_secA.xlsx')
+ data = pd.read_excel(file_path)
+ data['Percentage'] = (data['Marks'] / 15) * 100
+ A = data[data['Percentage'] > 75]
+ B = data[(data['Percentage'] >= 60) & (data['Percentage'] <= 75)]
+ C = data[data['Percentage'] < 60]
+ print("Students with > 75% marks:\n", A)
+ print("\nStudents with 60-75% marks:\n", B)
+ print("\nStudents with < 60% marks:\n", C)
+ plt.hist(data['Percentage'], bins=[0, 60, 75, 100], edgecolor='black', color='blue')
+ plt.xlabel('Percentage')
+ plt.ylabel('Number of Students')
+ plt.title('Histogram of Student Percentages')
+ plt.show()
+ plt.scatter(data.index, data['Percentage'], color='red')
+ plt.xlabel('Students')
+ plt.ylabel('Percentage')
+ plt.title('Scatter Plot of Student Percentages')
+ plt.show()
